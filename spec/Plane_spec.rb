@@ -12,9 +12,12 @@ let(:plane) { Plane.new }
 			expect(plane.flying).to be true
 		end
 
-		# it 'has a flying status when in the air' do
-		# 	expect(plane.flying).to be true
-		# end
+		it 'has a flying status when in the air' do
+			plane.in_air
+			expect(plane.in_air && plane.flying).to be true
+		end
+
+
 
 # 		it 'can take off' do
 # 		end

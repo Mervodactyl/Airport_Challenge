@@ -1,20 +1,17 @@
 class Plane
 
-# def initialize(plane)
-# 	flying?
-# end
+attr_reader :flying, :in_air, :name
+attr_writer :name
 
-def name
-	'Party Plane'
+def initialize
+	@flying = true
+	@in_air = true
+	@name = 'Party Plane'
 end
-
-def flying
-	true
-end
-
-# def in_air
-# 	flying?
-# end
 
 
 end
+
+
+
+puts name= "time traveling super plane"
