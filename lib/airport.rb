@@ -1,4 +1,8 @@
+require './lib/weather'
+
 class Airport
+
+include Weather
 
 CAPACITY = 3
 
