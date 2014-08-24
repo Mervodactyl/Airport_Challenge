@@ -2,6 +2,7 @@ require 'Plane'
 
 describe Plane do
 
+let(:airport) { Airport.new }
 let(:plane) { Plane.new }
 
 		it 'should have a name' do
@@ -28,6 +29,12 @@ context 'taking off and landing' do
 			plane.grounded
 			expect(plane.grounded).to be false
 		end
+
+		  it 'changes its status to flying after taking of' do
+		  	airport.land(plane)
+		  	airport.take_off(plane)
+				expect(plane.flying).to be true
+  end
 
 end
 

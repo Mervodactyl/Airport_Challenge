@@ -11,12 +11,12 @@ describe Airport do
   context 'taking off and landing' do
 
     it 'a plane can land' do
-    	airport.accept(plane)
+    	airport.land(plane)
     	expect(airport.hangar.count).to eq(1)
     	end
 
     it 'a plane can take off' do
-    	airport.accept(plane)
+    	airport.land(plane)
     	airport.take_off(plane)
     	expect(airport.hangar.count).to eq(0)
     end
@@ -26,10 +26,10 @@ describe Airport do
 context 'Traffic control' do
 
 		it 'a plane cannot land if the airport is full' do
-			airport.accept(plane)
-			airport.accept(plane2)
-			airport.accept(plane3)
-			expect(airport.accept(plane4)).to eq "bugger off we're full"
+			airport.land(plane)
+			airport.land(plane2)
+			airport.land(plane3)
+			expect(airport.land(plane4)).to eq "bugger off we're full"
 		end
 
 end
@@ -44,11 +44,12 @@ context 'weather conditions' do
 		# end
 end
 
-# context 'Grand finale test' do
+context 'Grand finale test' do
 
-# 		it 'all planes can land and all planes can take off' do
-# 		end
+		it 'planes can land and planes can take off' do
 
-# end
+		end
+
+end
 
 end
