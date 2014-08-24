@@ -14,12 +14,14 @@ attr_reader :hangar
 	end
 
 	def land(plane)
+		return "You're in the DANGER ZONE!!!" if weather == :stormy
 		return "bugger off we're full" if hangar.count == @capacity
 		plane.grounded
 		hangar << plane
 	end
 
 	def take_off(plane)
+		return "THOU SHALT NOT PASS" if weather == :stormy
 		hangar.delete(plane)
 		plane.take_off
 	end
