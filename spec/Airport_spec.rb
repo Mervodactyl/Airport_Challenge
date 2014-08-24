@@ -6,9 +6,6 @@ describe Airport do
 
   let(:airport) { Airport.new }
   let(:plane) { Plane.new }
-  let(:plane2) { Plane.new }
-	let(:plane3) { Plane.new }
-	let(:plane4) { Plane.new }
 
   context 'taking off and landing' do
 
@@ -31,10 +28,8 @@ context 'Traffic control' do
 
 		it 'a plane cannot land if the airport is full' do
 			allow(airport).to receive(:weather) { :sunny }
-			airport.land(plane)
-			airport.land(plane2)
-			airport.land(plane3)
-			expect(airport.land(plane4)).to eq "bugger off we're full"
+			(airport.capacity).times { airport.land(Plane.new) }
+      expect(airport.land(Plane.new)).to eq "bugger off we're full"
 		end
 
 end

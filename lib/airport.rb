@@ -6,7 +6,7 @@ include Weather
 
 CAPACITY = 3
 
-attr_reader :hangar
+attr_reader :hangar, :capacity
 
 	def initialize
 		@hangar = []
