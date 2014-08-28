@@ -5,19 +5,28 @@ require 'airport'
 describe Airport do
 
   let(:airport) { Airport.new }
-  let(:plane) { Plane.new }
+  let!(:plane) { double :plane}
 
   context 'taking off and landing' do
 
-    it 'a plane can land' do
-    	expect(airport).to receive(:weather) { :sunny }
+    it 'puts a plane in the hanger when it has landed' do
+    	allow(airport).to receive(:weather) { :sunny }
+      allow(plane).to receive(:grounded)
     	airport.land(plane)
     	expect(airport.hangar.count).to eq(1)
-    	end
+    end
+
+    it 'grounds the plane when landed' do
+      allow(airport).to receive(:weather) { :sunny }
+      expect(plane).to receive(:grounded)
+      airport.land(plane)
+    end
 
     it 'a plane can take off' do
     	allow(airport).to receive(:weather) { :sunny }
-    	airport.land(plane)
+      allow(plane).to receive(:grounded)
+      airport.land(plane)
+      expect(plane).to receive(:take_off)
     	airport.take_off(plane)
     	expect(airport.hangar.count).to eq(0)
     end
@@ -28,8 +37,9 @@ context 'Traffic control' do
 
 		it 'a plane cannot land if the airport is full' do
 			allow(airport).to receive(:weather) { :sunny }
-			(airport.capacity).times { airport.land(Plane.new) }
-      expect(airport.land(Plane.new)).to eq "bugger off we're full"
+      allow(plane).to receive(:grounded)
+			(airport.capacity).times { airport.land(plane) }
+      expect(airport.land(plane)).to eq "bugger off we're full"
 		end
 
 end
@@ -39,6 +49,7 @@ end
 context 'weather conditions' do
 
 		it 'a plane cannot take off if a storm is brewing' do
+      allow(plane).to receive(:grounded)
 			airport.land(plane)
 			expect(airport).to receive(:weather) { :stormy }
 			expect(airport.take_off(plane)).to eq "THOU SHALT NOT PASS"
